@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>PARECER RECURSAL</title>
+  <style>
+    /* Importa a fonte IBM Plex Sans */
+    @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;600&display=swap');
+
+    /* Aplica a fonte ao corpo e elementos de texto */
+    body {
+      font-family: 'IBM Plex Sans', sans-serif;
+    }
+    button {
+      font-family: 'IBM Plex Sans', sans-serif;
+    }
+    p {
+      font-family: 'IBM Plex Sans', sans-serif;
+    }
+    textarea, input, select {
+      font-family: 'IBM Plex Sans', sans-serif;
+    }
+  </style>
+  <script>
+    function selecionarTexto() {
+      var elemento = document.getElementById("resultadoTexto");
+
+      if (document.body.createTextRange) {
+        // Internet Explorer
+        var range = document.body.createTextRange();
+        range.moveToElementText(elemento);
+        range.select();
+      } else if (window.getSelection) {
+        // Outros navegadores
+        var range = document.createRange();
+        range.selectNode(elemento);
+        window.getSelection().removeAllRanges();
+        window.getSelection().addRange(range);
+      }
+
+      // Copiar para a área de transferência (opcional)
+      document.execCommand("copy");
+    }
+
+    function copiarExplicacao() {
+      var estorno = document.getElementById("estornoTexto").value;
+      
+      // Criar elemento temporário para copiar o texto
+      var tempElement = document.createElement("textarea");
+      tempElement.style.position = "absolute";
+      tempElement.style.left = "-10000px";
+      tempElement.value = estorno;
+      document.body.appendChild(tempElement);
+      tempElement.select();
+      document.execCommand("copy");
+      document.body.removeChild(tempElement);
+    }
+
+    function obterOpcaoSelecionada() {
+      var descricao = document.getElementById("descricao").value || "N/A";
+      var assunto = document.getElementById("assunto").value || "N/A";
+      var liminar = document.getElementById("houve.liminar").value || "N/A";
+      var resumoContestacao = document.getElementById("resumoContestacao").value || "N/A";
+      var resumoSentenca = document.getElementById("resumoSentenca").value || "N/A";
+      var valorCompra = document.getElementById("valorCompra").value || "N/A";
+      var condenacaoSolidaria = document.getElementById("condenacaoSolidaria").value || "N/A";
+      var valorDevido = document.getElementById("valorDevido").value || "N/A";
+      var responsabilidade = document.getElementById("responsabilidade").value || "N/A";
+      var responsavelPolo = document.getElementById("responsavelPolo").value || "N/A";
+
+      var multa = document.getElementById("multa").value || "N/A";
+      var liminarCumprida = document.getElementById("liminarCumprida").value || "N/A";
+      var quemCumpriu = document.getElementById("quemCumpriu").value || "N/A";
+
+      var estorno = document.getElementById("estornoTexto").value || "N/A";
+
+      var resultado = `• BREVE RESUMO DA INICIAL: ${descricao}
+      \n\n• ASSUNTO DO PROCESSO: ${assunto}
+      \n\n• HOUVE LIMINAR? ${liminar === "5" ? "SIM" : "NÃO"}
+      \n\n• MULTA: ${liminar === "5" ? multa : "N/A"}
+      \n\n• LIMINAR CUMPRIDA? ${liminar === "5" ? liminarCumprida : "N/A"}
+      \n\n• QUEM CUMPRIU A LIMINAR? ${liminar === "5" ? quemCumpriu : "N/A"}
+      \n\n• RESUMO DA CONTESTAÇÃO: ${resumoContestacao}
+      \n\n• RESUMO DA SENTENÇA: ${resumoSentenca}
+      \n\n• VALOR EM DISCUSSÃO (VALOR DA COMPRA): ${valorCompra}
+      \n\n• CONDENAÇÃO SOLIDÁRIA? ${condenacaoSolidaria === "5" ? "SIM" : "NÃO"}
+      \n\n• VALOR DEVIDO PELO ML (CONDENAÇÃO ATUALIZADA): R$ ${valorDevido}
+      \n\n• RESPONSABILIDADE: ${responsabilidade}
+      \n\n• RESPONSÁVEL ESTÁ NO POLO? ${responsavelPolo === "5" ? "SIM" : "NÃO"}
+      \n\n• EXPLICAÇÃO SOBRE O RECURSO: ${estorno}`;
+
+      document.getElementById("resultadoTexto").innerText = resultado;
+    }
+
+    function condicionalLiminar() {
+      var selectedOption = document.getElementById("houve.liminar").value;
+      var camposLiminar = document.getElementById("camposLiminar");
+      camposLiminar.style.display = (selectedOption === "5") ? "block" : "none";
+    }
+  </script>
+</head>
+<body>
+<center>
+  <button onclick="document.getElementById('form1').reset(); document.getElementById('form2').reset(); document.getElementById('form3').reset(); document.getElementById('form4').reset(); document.getElementById('form5').reset(); document.getElementById('form6').reset(); document.getElementById('form7').reset(); document.getElementById('form8').reset(); document.getElementById('form9').reset(); document.getElementById('form10').reset(); document.getElementById('form11').reset(); document.getElementById('resultadoTexto').innerText = '';" style="margin: 0; padding: 0; border: none; background: none;">
+    <img src="logo.qca.png" style="width: 300px; height: 90px; margin-right: 10px;" alt="Limpar modelo">
+  </button>
+
+  <p align="center" style="font-family: 'IBM Plex Sans', sans-serif; font-size: 28px; color: Black;">PARECER RECURSAL</p>
+</center>
+
+<table style="width: 100%; font-family: 'IBM Plex Sans', sans-serif;">
+<tr>
+  <td style="width: 50%; background-color: #ffffff;">
+    <p>• BREVE RESUMO DA INICIAL:</p>
+    <form id="form1">
+      <textarea name="descricao.da.obg" id="descricao" rows="4" cols="50"></textarea>
+    </form>
+
+    <p>• Assunto do Processo:</p>
+    <form id="form2">
+      <select name="assunto" id="assunto">
+        <option value="0"></option>
+        <option value="FALHA NA ENTREGA">FALHA NA ENTREGA</option>
+        <option value="PRODUTO COM DEFEITO">PRODUTO COM DEFEITO</option>
+        <option value="PRODUTO COM VÍCIO">PRODUTO COM VÍCIO</option>
+        <option value="NEGATIVAÇÃO INDEVIDA">NEGATIVAÇÃO INDEVIDA</option>
+        <option value="CANCELAMENTO UNILATERAL">CANCELAMENTO UNILATERAL</option>
+      </select>
+    </form>
+
+    <p>• Houve Liminar?</p>
+    <form id="form3">
+      <select name="houve.liminar" id="houve.liminar" onchange="condicionalLiminar()">
+        <option value="0"></option>
+        <option value="5">SIM</option>
+        <option value="2">NÃO</option>
+      </select>
+    </form>
+
+    <div id="camposLiminar" style="display: none;">
+      <p>Multa:</p>
+      <input type="text" name="multa" id="multa" value="N/A">
+      
+      <p>• Liminar cumprida?</p>
+      <input type="text" name="liminarCumprida" id="liminarCumprida" value="N/A">
+      
+      <p>• Quem cumpriu a liminar?</p>
+      <input type="text" name="quemCumpriu" id="quemCumpriu" value="N/A">
+    </div>
+
+    <p>• Resumo da contestação:</p>
+    <form id="form4">
+      <textarea name="resumo.contestacao" id="resumoContestacao" rows="4" cols="50"></textarea>
+    </form>
+
+    <p>• Resumo da sentença:</p>
+    <form id="form5">
+      <textarea name="resumo.sentenca" id="resumoSentenca" rows="4" cols="50"></textarea>
+    </form>
+
+    <p>• Valor em discussão (valor da compra):</p>
+    <form id="form6">
+      <input type="text" name="valorCompra" id="valorCompra">
+    </form>
+
+    <p>• Condenação solidária?</p>
+    <form id="form7">
+      <select name="condenacaoSolidaria" id="condenacaoSolidaria">
+        <option value="0"></option>
+        <option value="5">SIM</option>
+        <option value="2">NÃO</option>
+      </select>
+    </form>
+
+    <p>• Valor devido pelo ML (condenação atualizada):</p>
+    <form id="form8">
+      <input type="text" name="valorDevido" id="valorDevido">
+    </form>
+
+    <p>• Responsabilidade:</p>
+    <form id="form9">
+      <select name="responsabilidade" id="responsabilidade">
+        <option value="0"></option>
+        <option value="MAGAZINE LUIZA">MAGAZINE LUIZA</option>
+        <option value="LUIZACRED">CORRÉU</option>
+        <option value="FABRICANTE">FABRICANTE</option>
+	<option value="SELLER">SELLER</option>
+	<option value="BANCO">BANCO</option>
+	<option value="TERCEIROS">TERCEIROS</option>
+	<option value="TRANSPORTADORA">TRANSPORTADORA</option>
+	<option value="SEGURADORA">SEGURADORA</option>
+	
+      </select>
+    </form>
+
+    <p>• Responsável está no polo:</p>
+    <form id="form10">
+      <select name="responsavelPolo" id="responsavelPolo">
+        <option value="0"></option>
+        <option value="5">SIM</option>
+        <option value="2">NÃO</option>
+      </select>
+    </form>
+
+    <p>• Explicação sobre o recurso:</p>
+    <form id="form11">
+      <textarea name="estorno" id="estornoTexto" rows="4" cols="50"></textarea>
+    </form>
+
+    <p>
+      <button type="button" onclick="obterOpcaoSelecionada()">OBTER PARECER</button>
+      <button type="button" onclick="copiarExplicacao()">COPIAR EXPLICAÇÃO</button>
+    </p>
+  </td>
+
+  <td style="width: 50%; background-color: #ffffff;">
+    <p id="resultadoTexto"></p>
+    <button onclick="selecionarTexto()">OBTER PARECER</button>
+  </td>
+</tr>
+</table>
+</body>
+</html>
+
+
