@@ -73,6 +73,16 @@
 
       var estorno = document.getElementById("estornoTexto").value || "N/A";
 
+      // Substituindo asteriscos por "•"
+      descricao = descricao.replace(/\*/g, "•");
+      assunto = assunto.replace(/\*/g, "•");
+      resumoContestacao = resumoContestacao.replace(/\*/g, "•");
+      resumoSentenca = resumoSentenca.replace(/\*/g, "•");
+      valorCompra = valorCompra.replace(/\*/g, "•");
+      valorDevido = valorDevido.replace(/\*/g, "•");
+      responsabilidade = responsabilidade.replace(/\*/g, "•");
+      estorno = estorno.replace(/\*/g, "•");
+
       var resultado = `• BREVE RESUMO DA INICIAL: ${descricao}
       \n\n• ASSUNTO DO PROCESSO: ${assunto}
       \n\n• HOUVE LIMINAR? ${liminar === "5" ? "SIM" : "NÃO"}
@@ -183,12 +193,11 @@
         <option value="MAGAZINE LUIZA">MAGAZINE LUIZA</option>
         <option value="LUIZACRED">CORRÉU</option>
         <option value="FABRICANTE">FABRICANTE</option>
-	<option value="SELLER">SELLER</option>
-	<option value="BANCO">BANCO</option>
-	<option value="TERCEIROS">TERCEIROS</option>
-	<option value="TRANSPORTADORA">TRANSPORTADORA</option>
-	<option value="SEGURADORA">SEGURADORA</option>
-	
+        <option value="SELLER">SELLER</option>
+        <option value="BANCO">BANCO</option>
+        <option value="TERCEIROS">TERCEIROS</option>
+        <option value="TRANSPORTADORA">TRANSPORTADORA</option>
+        <option value="SEGURADORA">SEGURADORA</option>
       </select>
     </form>
 
@@ -220,5 +229,3 @@
 </table>
 </body>
 </html>
-
-
